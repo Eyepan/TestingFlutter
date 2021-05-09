@@ -88,6 +88,10 @@ class NewsFeedInstances extends StatelessWidget {
                   onPressed: () {/*Upvote downvote bs*/},
                   child: Icon(Icons.arrow_downward),
                 ),
+                ElevatedButton(
+                  onPressed: () {/* Share */},
+                  child: Icon(Icons.share),
+                ),
               ],
             ),
           ],
