@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
                   "This is the title", "This is the fucking content"),
               NewsFeedInstances(
                   "You can up vote the thing by clicking on the blue button",
-                  "Down vote button coming soon"),
+                  "Down vote button came soon"),
               NewsFeedInstances.withoutDetails(),
               NewsFeedInstances.withoutDetails(),
               NewsFeedInstances.withoutDetails(),
@@ -76,21 +76,20 @@ class NewsFeedInstances extends StatelessWidget {
               child: Text(this._content,
                   style: TextStyle(color: Colors.white, fontSize: 15)),
             ),
-            Padding(
-                padding: EdgeInsets.fromLTRB(270, 0.0, 0.0, 0.0),
-                child: Row(
-                  //margin: EdgeInsets.all(8.0),
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {/*Upvote downvote bs*/},
-                      child: Text("^"),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {/*Upvote downvote bs*/},
-                      child: Text("V"),
-                    ),
-                  ],
-                )),
+            Row(
+              //margin: EdgeInsets.all(8.0),
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  onPressed: () {/*Upvote downvote bs*/},
+                  child: Icon(Icons.arrow_upward),
+                ),
+                ElevatedButton(
+                  onPressed: () {/*Upvote downvote bs*/},
+                  child: Icon(Icons.arrow_downward),
+                ),
+              ],
+            ),
           ],
         ),
       ),
