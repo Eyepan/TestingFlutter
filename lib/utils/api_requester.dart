@@ -7,7 +7,7 @@ import 'article_class.dart';
 
 class API_Requester {
   final endPointUrl =
-      'https://newsapi.org/v2/top-headlines?country=us&apiKey=${consts.api_key}';
+      'https://newsapi.org/v2/top-headlines?country=in&apiKey=${consts.api_key}';
 
   Future<List<Article>> getArticles() async {
     Response response = await get(endPointUrl);
