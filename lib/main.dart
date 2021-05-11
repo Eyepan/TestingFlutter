@@ -22,24 +22,27 @@ class _HomePageState extends State<HomePage> {
           title: Text("FlashReads",
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-          backgroundColor: Colors.grey[800],
+          backgroundColor: Colors.black,
           centerTitle: true,
         ),
-        body: FutureBuilder(
-            future: client.getArticles(),
-            builder:
-                (BuildContext context, AsyncSnapshot<List<Article>> snapshot) {
-              if (snapshot.hasData) {
-                List<Article> articles = snapshot.data;
-                return ListView.builder(
-                    itemCount: articles.length,
-                    itemBuilder: (BuildContext context, index) =>
-                        customListTile(articles[index]));
-              }
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }),
+        body: Container(
+          color: Colors.black,
+          child: FutureBuilder(
+              future: client.getArticles(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<Article>> snapshot) {
+                if (snapshot.hasData) {
+                  List<Article> articles = snapshot.data;
+                  return ListView.builder(
+                      itemCount: articles.length,
+                      itemBuilder: (BuildContext context, index) =>
+                          customListTile(articles[index]));
+                }
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }),
+        ),
       ),
     );
   }
