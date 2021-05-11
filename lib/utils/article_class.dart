@@ -2,7 +2,6 @@ import 'source_class.dart';
 
 class Article {
   Source source;
-  String author;
   String title;
   String description;
   String url;
@@ -12,7 +11,6 @@ class Article {
 
   Article(
       {this.source,
-      this.author,
       this.title,
       this.description,
       this.url,
@@ -24,11 +22,11 @@ class Article {
   factory Article.fromJSON(Map<String, dynamic> json) {
     return Article(
         source: Source.fromJson(json['source']),
-        author: json['author'],
+        // author: json['author'],
         title: json['title'],
         description: json['description'],
         url: json['url'],
-        imgUrl: json['urlToImage'].toString(),
+        imgUrl: json['image'],
         publishedAt: json['publishedAt'],
         contents: json['content']);
   }

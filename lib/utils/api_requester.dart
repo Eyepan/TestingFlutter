@@ -5,9 +5,10 @@ import 'package:flutter_app/constants.dart' as consts;
 
 import 'article_class.dart';
 
+// ignore: camel_case_types
 class API_Requester {
   final endPointUrl =
-      'https://newsapi.org/v2/top-headlines?country=in&apiKey=${consts.api_key}';
+      'https://gnews.io/api/v4/top-headlines?token=6f78ff796453389a2cb76da91c7982fc&country=in';
 
   Future<List<Article>> getArticles() async {
     Response response = await get(endPointUrl);

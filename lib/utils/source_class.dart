@@ -1,13 +1,13 @@
 // needed by articles
 
 class Source {
-  String id;
+  String url;
   String name;
 
-  Source({ this.id, this.name});
+  Source({ this.url, this.name});
 
   // a factory function to parse from json
   factory Source.fromJson(Map<String, dynamic> json) {
-    return Source(id: json['id'], name: json['name']);
+    return Source(url: json['url'], name: json['name']);
   }
 }

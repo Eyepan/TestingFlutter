@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/components/customListTile.dart';
 import 'package:flutter_app/utils/api_requester.dart';
 import 'package:flutter_app/utils/article_class.dart';
-import 'package:flutter_app/constants.dart' as consts;
 
 void main() => runApp(HomePage());
 
@@ -17,6 +16,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text("FlashReads",
@@ -31,16 +31,21 @@ class _HomePageState extends State<HomePage> {
               future: client.getArticles(),
               builder: (BuildContext context,
                   AsyncSnapshot<List<Article>> snapshot) {
+
+
                 if (snapshot.hasData) {
                   List<Article> articles = snapshot.data;
                   return ListView.builder(
                       itemCount: articles.length,
                       itemBuilder: (BuildContext context, index) =>
-                          customListTile(articles[index]));
+                          customListTile(articles[index], context));
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
+
+                
               }),
         ),
       ),
