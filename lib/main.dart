@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/customListTile.dart';
 import 'package:flutter_app/utils/api_requester.dart';
 import 'package:flutter_app/utils/article_class.dart';
 import 'package:flutter_app/constants.dart' as consts;
@@ -32,9 +33,8 @@ class _HomePageState extends State<HomePage> {
                 List<Article> articles = snapshot.data;
                 return ListView.builder(
                     itemCount: articles.length,
-                    itemBuilder: (BuildContext context, index) => ListTile(
-                          title: Text(articles[index].title),
-                        ));
+                    itemBuilder: (BuildContext context, index) =>
+                        customListTile(articles[index]));
               }
               return Center(
                 child: CircularProgressIndicator(),
