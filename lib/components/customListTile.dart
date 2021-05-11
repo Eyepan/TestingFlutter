@@ -3,6 +3,7 @@ import 'package:flutter_app/constants.dart' as consts;
 import 'package:flutter_app/utils/article_class.dart';
 
 Widget customListTile(Article article) {
+  print(article.imgUrl);
   return Container(
       padding: EdgeInsets.all(12.0),
       margin: EdgeInsets.all(12.0),

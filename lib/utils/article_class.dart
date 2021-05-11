@@ -11,14 +11,14 @@ class Article {
   String contents;
 
   Article(
-      { this.source,
-       this.author,
-       this.title,
-       this.description,
-       this.url,
-       this.imgUrl,
-       this.publishedAt,
-       this.contents});
+      {this.source,
+      this.author,
+      this.title,
+      this.description,
+      this.url,
+      this.imgUrl,
+      this.publishedAt,
+      this.contents});
 
   // same deal as factory function
   factory Article.fromJSON(Map<String, dynamic> json) {
@@ -28,7 +28,7 @@ class Article {
         title: json['title'],
         description: json['description'],
         url: json['url'],
-        imgUrl: json['urlToImage'],
+        imgUrl: json['urlToImage'].toString(),
         publishedAt: json['publishedAt'],
         contents: json['content']);
   }
