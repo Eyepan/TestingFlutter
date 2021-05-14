@@ -1,37 +1,89 @@
 import 'package:flash_reads/utils/article_class.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
-class ArticleDetailsPage extends StatelessWidget {
+class ArticleDetailsPage extends StatefulWidget {
   final Article article;
 
   // ignore: use_key_in_widget_constructors
   const ArticleDetailsPage({required this.article});
 
   @override
+  State<ArticleDetailsPage> createState() => _ArticleDetailsPageState();
+}
+
+class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
+  final ScrollController _scrollController = ScrollController();
+
+  bool _showFloatingButton = true;
+
+  @override
+  void initState() {
+    super.initState();
+    handleScroll();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(() {});
+    super.dispose();
+  }
+
+  void showFloatingActionButton() {
+    setState(() {
+      _showFloatingButton = true;
+    });
+  }
+
+  void hideFloatingActionButton() {
+    setState(() {
+      _showFloatingButton = false;
+    });
+  }
+
+  void handleScroll() async {
+    _scrollController.addListener(() {
+      if (_scrollController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        hideFloatingActionButton();
+      }
+      if (_scrollController.position.userScrollDirection ==
+          ScrollDirection.forward) {
+        showFloatingActionButton();
+      }
+    });
+  }
+
+  List<Widget> listofParagraphs = [];
+
+  @override
   Widget build(BuildContext context) {
+    for (String paragraph in widget.article.contents) {
+      //for (int i = 0; i < widget.article.contents.length; i++) {
+      listofParagraphs.add(Padding(
+        padding: const EdgeInsets.only(top: 10.0),
+        child: Text(paragraph,
+            style: Theme.of(context)
+                .textTheme
+                .subtitle1!
+                .copyWith(color: Colors.white70)),
+      ));
+    }
+
     return Scaffold(
-      appBar: AppBar(title: Text(article.title)),
+      appBar: AppBar(title: Text(widget.article.title)),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(15.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 300,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(article.multimedia[0].url),
-                  ),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-              ),
+              Image.network(widget.article.multimedia[0].url),
               const SizedBox(height: 8.0),
               Text(
-                article.title,
+                widget.article.title,
                 style: Theme.of(context)
                     .textTheme
                     .headline4!
@@ -39,29 +91,28 @@ class ArticleDetailsPage extends StatelessWidget {
               ),
               const SizedBox(height: 8.0),
               Text(
-                article.abstract,
+                widget.article.abstract,
                 style: Theme.of(context)
                     .textTheme
                     .subtitle1!
                     .copyWith(color: Colors.white70),
               ),
-              const SizedBox(height: 8.0),
-              Text(
-                article.contents,
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle1!
-                    .copyWith(color: Colors.white70),
-              ),
+              Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: listofParagraphs)
             ],
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          launch(article.url);
-        },
-        child: const Icon(Icons.open_in_browser),
+      floatingActionButton: Visibility(
+        visible: _showFloatingButton,
+        child: FloatingActionButton(
+          onPressed: () {
+            launch(widget.article.url);
+          },
+          child: const Icon(Icons.open_in_browser),
+        ),
       ),
     );
   }
