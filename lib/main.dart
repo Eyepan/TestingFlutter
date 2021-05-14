@@ -1,52 +1,75 @@
+import 'package:flash_reads/pages/favourites_page.dart';
+import 'package:flash_reads/pages/home_page.dart';
+import 'package:flash_reads/pages/live_video.dart';
+import 'package:flash_reads/pages/settings_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/components/customListTile.dart';
-import 'package:flutter_app/utils/api_requester.dart';
-import 'package:flutter_app/utils/article_class.dart';
 
-void main() => runApp(HomePage());
+void main() => runApp(
+      MaterialApp(
+        title: 'FlashReads',
+        debugShowCheckedModeBanner: false,
+        home: MyHomePage(),
+        theme: ThemeData(
+          primarySwatch: Colors.purple,
+          primaryColor: Colors.grey[800],
+          backgroundColor: Colors.grey[900],
+          brightness: Brightness.dark,
+          textTheme: const TextTheme(
+            headline3: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
 
-class HomePage extends StatefulWidget {
+// ignore: use_key_in_widget_constructors
+class MyHomePage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  API_Requester client = API_Requester();
+class _MyHomePageState extends State<MyHomePage> {
+  List<Widget> pages = [
+    HomePage(),
+    FavouritesPage(),
+    LiveVideoPage(),
+    SettingsPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
         appBar: AppBar(
-          title: Text("FlashReads",
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-          backgroundColor: Colors.black,
-          centerTitle: true,
+          title: const Text("FlashReads"),
+          //backgroundColor: Colors.blueGrey,
+          elevation: 0.0,
         ),
-        body: Container(
-          color: Colors.black,
-          child: FutureBuilder(
-              future: client.getArticles(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<List<Article>> snapshot) {
-
-
-                if (snapshot.hasData) {
-                  List<Article> articles = snapshot.data;
-                  return ListView.builder(
-                      itemCount: articles.length,
-                      itemBuilder: (BuildContext context, index) =>
-                          customListTile(articles[index], context));
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-
-                
-              }),
+        //backgroundColor: Theme.of(context).primarySwatch,
+        body: TabBarView(
+          children: pages,
+        ),
+        bottomNavigationBar: const TabBar(
+          tabs: [
+            Tab(
+              icon: Icon(Icons.home),
+            ),
+            Tab(
+              icon: Icon(Icons.bookmark),
+            ),
+            Tab(
+                icon: Icon(
+              Icons.video_call_sharp,
+            )),
+            Tab(
+              icon: Icon(Icons.settings),
+            ),
+          ],
+          unselectedLabelColor: Colors.blueGrey,
+          labelColor: Colors.white,
+          indicatorColor: Colors.white,
         ),
       ),
     );

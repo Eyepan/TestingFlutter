@@ -1,33 +1,75 @@
-import 'source_class.dart';
+import 'multimedia_class.dart';
 
 class Article {
-  Source source;
+  String section;
+  String subsection;
   String title;
-  String description;
+  String abstract;
   String url;
-  String imgUrl;
-  String publishedAt;
-  String contents;
+  String uri;
+  String byline;
+  String itemType;
+  String updatedDate;
+  String createdDate;
+  String publishedDate;
+  String materialTypeFacet;
+  String kicker;
+  List<dynamic> desFacet;
+  List<dynamic> orgFacet;
+  List<dynamic> perFacet;
+  List<dynamic> geoFacet;
+  List<Multimedia> multimedia;
+  String shortUrl;
 
   Article(
-      {this.source,
-      this.title,
-      this.description,
-      this.url,
-      this.imgUrl,
-      this.publishedAt,
-      this.contents});
+      {required this.section,
+      required this.subsection,
+      required this.title,
+      required this.abstract,
+      required this.url,
+      required this.uri,
+      required this.byline,
+      required this.itemType,
+      required this.updatedDate,
+      required this.createdDate,
+      required this.publishedDate,
+      required this.materialTypeFacet,
+      required this.kicker,
+      required this.desFacet,
+      required this.orgFacet,
+      required this.perFacet,
+      required this.geoFacet,
+      required this.multimedia,
+      required this.shortUrl});
 
-  // same deal as factory function
-  factory Article.fromJSON(Map<String, dynamic> json) {
+  factory Article.fromJson(Map<String, dynamic> json) {
+    final items = json['multimedia'];
+    List<Multimedia> multimediaList = [];
+
+    for (int i = 0; i < items.length; i++) {
+      multimediaList.add(Multimedia.fromJSON(items[i]));
+    }
+
+    final contents;
     return Article(
-        source: Source.fromJson(json['source']),
-        // author: json['author'],
+        section: json['section'],
+        subsection: json['subsection'],
         title: json['title'],
-        description: json['description'],
+        abstract: json['abstract'],
         url: json['url'],
-        imgUrl: json['image'],
-        publishedAt: json['publishedAt'],
-        contents: json['content']);
+        uri: json['uri'],
+        byline: json['byline'],
+        itemType: json['item_type'],
+        updatedDate: json['updated_date'],
+        createdDate: json['created_date'],
+        publishedDate: json['published_date'],
+        materialTypeFacet: json['material_type_facet'],
+        kicker: json['kicker'],
+        desFacet: json['des_facet'],
+        orgFacet: json['org_facet'],
+        perFacet: json['per_facet'],
+        geoFacet: json['geo_facet'],
+        multimedia: multimediaList,
+        shortUrl: json['short_url']);
   }
 }
