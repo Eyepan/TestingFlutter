@@ -9,14 +9,14 @@ class Multimedia {
   String copyright;
 
   Multimedia(
-      {required this.url,
-      required this.format,
-      required this.height,
-      required this.width,
-      required this.type,
-      required this.subtype,
-      required this.caption,
-      required this.copyright});
+      {this.url,
+      this.format,
+      this.height,
+      this.width,
+      this.type,
+      this.subtype,
+      this.caption,
+      this.copyright});
 
   factory Multimedia.fromJSON(Map<String, dynamic> json) {
     return Multimedia(

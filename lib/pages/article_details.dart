@@ -7,7 +7,7 @@ class ArticleDetailsPage extends StatefulWidget {
   final Article article;
 
   // ignore: use_key_in_widget_constructors
-  const ArticleDetailsPage({required this.article});
+  const ArticleDetailsPage({this.article});
 
   @override
   State<ArticleDetailsPage> createState() => _ArticleDetailsPageState();
@@ -63,16 +63,19 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
       //for (int i = 0; i < widget.article.contents.length; i++) {
       listofParagraphs.add(Padding(
         padding: const EdgeInsets.only(top: 10.0),
-        child: Text(paragraph,
-            style: Theme.of(context)
-                .textTheme
-                .subtitle1!
-                .copyWith(color: Colors.white70)),
+        child: Text(
+          paragraph,
+          style: Theme.of(context)
+              .textTheme
+              .subtitle1
+              .copyWith(color: Colors.white70),
+        ),
       ));
     }
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.article.title)),
+      backgroundColor: Colors.grey[900],
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: SingleChildScrollView(
@@ -86,7 +89,7 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
                 widget.article.title,
                 style: Theme.of(context)
                     .textTheme
-                    .headline4!
+                    .headline4
                     .copyWith(color: Colors.white),
               ),
               const SizedBox(height: 8.0),
@@ -94,7 +97,7 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
                 widget.article.abstract,
                 style: Theme.of(context)
                     .textTheme
-                    .subtitle1!
+                    .subtitle1
                     .copyWith(color: Colors.white70),
               ),
               Column(

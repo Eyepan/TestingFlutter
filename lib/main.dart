@@ -3,6 +3,7 @@ import 'package:flash_reads/pages/home_page.dart';
 import 'package:flash_reads/pages/live_video.dart';
 import 'package:flash_reads/pages/settings_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
 void main() => runApp(
       MaterialApp(
@@ -11,8 +12,8 @@ void main() => runApp(
         home: MyHomePage(),
         theme: ThemeData(
           primarySwatch: Colors.purple,
-          primaryColor: Colors.grey[800],
-          backgroundColor: Colors.grey[900],
+          primaryColor: Colors.grey[1000],
+          backgroundColor: Colors.black,
           brightness: Brightness.dark,
           textTheme: const TextTheme(
             headline3: TextStyle(
@@ -23,8 +24,10 @@ void main() => runApp(
       ),
     );
 
-// ignore: use_key_in_widget_constructors
+// ignore: must_be_immutable, use_key_in_widget_constructors
 class MyHomePage extends StatefulWidget {
+  CacheProvider _customCacheProvider;
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -36,6 +39,16 @@ class _MyHomePageState extends State<MyHomePage> {
     LiveVideoPage(),
     SettingsPage(),
   ];
+
+  Future<void> asyncInits() async {
+    await Settings.init(cacheProvider: widget._customCacheProvider);
+  }
+
+  @override
+  void initState() {
+    asyncInits();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

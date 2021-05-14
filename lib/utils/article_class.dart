@@ -25,25 +25,25 @@ class Article {
   List<String> contents = [];
 
   Article(
-      {required this.section,
-      required this.subsection,
-      required this.title,
-      required this.abstract,
-      required this.url,
-      required this.uri,
-      required this.byline,
-      required this.itemType,
-      required this.updatedDate,
-      required this.createdDate,
-      required this.publishedDate,
-      required this.materialTypeFacet,
-      required this.kicker,
-      required this.desFacet,
-      required this.orgFacet,
-      required this.perFacet,
-      required this.geoFacet,
-      required this.multimedia,
-      required this.shortUrl});
+      {this.section,
+      this.subsection,
+      this.title,
+      this.abstract,
+      this.url,
+      this.uri,
+      this.byline,
+      this.itemType,
+      this.updatedDate,
+      this.createdDate,
+      this.publishedDate,
+      this.materialTypeFacet,
+      this.kicker,
+      this.desFacet,
+      this.orgFacet,
+      this.perFacet,
+      this.geoFacet,
+      this.multimedia,
+      this.shortUrl});
 
   void addContents(String contents) {
     this.contents.add(contents);
