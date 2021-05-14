@@ -8,13 +8,11 @@ class APIHandler {
 
   Future<List<Article>> getArticles() async {
     Response response = await get(Uri.parse(endPointUrl));
-
     if (response.statusCode == 200) {
       Map<String, dynamic> json = jsonDecode(response.body);
       List<dynamic> body = json['results'];
       List<Article> articles =
           body.map((dynamic item) => Article.fromJson(item)).toList();
-
       return articles;
     } else {
       throw ("Can't load articles from " +

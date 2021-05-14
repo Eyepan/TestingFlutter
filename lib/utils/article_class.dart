@@ -1,4 +1,8 @@
 import 'multimedia_class.dart';
+import 'package:web_scraper/web_scraper.dart';
+import 'package:html/parser.dart';
+import 'package:html/dom.dart';
+import 'package:http/http.dart';
 
 class Article {
   String section;
@@ -20,6 +24,7 @@ class Article {
   List<dynamic> geoFacet;
   List<Multimedia> multimedia;
   String shortUrl;
+  String contents = '';
 
   Article(
       {required this.section,
@@ -42,6 +47,10 @@ class Article {
       required this.multimedia,
       required this.shortUrl});
 
+  void addContents(String contents) {
+    this.contents = contents;
+  }
+
   factory Article.fromJson(Map<String, dynamic> json) {
     final items = json['multimedia'];
     List<Multimedia> multimediaList = [];
@@ -50,7 +59,6 @@ class Article {
       multimediaList.add(Multimedia.fromJSON(items[i]));
     }
 
-    final contents;
     return Article(
         section: json['section'],
         subsection: json['subsection'],
@@ -72,4 +80,15 @@ class Article {
         multimedia: multimediaList,
         shortUrl: json['short_url']);
   }
+}
+
+Future<void> getContents(Article article) async {
+  Response response = await get(Uri.parse(article.url));
+  var document = parse(response.body);
+  var elems = document.getElementsByClassName('css-axufdj evys1bk0');
+  var contents = '';
+  for (var element in elems) {
+    contents += (element.text + '\n');
+  }
+  article.addContents(contents);
 }

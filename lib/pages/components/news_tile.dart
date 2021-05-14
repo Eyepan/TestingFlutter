@@ -4,7 +4,8 @@ import 'package:flash_reads/utils/article_class.dart';
 
 Widget newsTile(Article article, BuildContext context) {
   return InkWell(
-    onTap: () {
+    onTap: () async {
+      await getContents(article);
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -43,3 +44,5 @@ Widget newsTile(Article article, BuildContext context) {
     ),
   );
 }
+
+// /html/body/div/div/div/div[2]/main/div/article/section/div[1]/div

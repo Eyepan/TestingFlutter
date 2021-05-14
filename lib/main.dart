@@ -47,6 +47,39 @@ class _MyHomePageState extends State<MyHomePage> {
           //backgroundColor: Colors.blueGrey,
           elevation: 0.0,
         ),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: const <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Center(child: Text('News Categories')),
+              ),
+              ListTile(
+                title: Text('Local News'),
+                onTap: null,
+              ),
+              ListTile(
+                title: Text('State News'),
+                onTap: null,
+              ),
+              ListTile(
+                title: Text('National News'),
+                onTap: null,
+              ),
+              ListTile(
+                title: Text('International News'),
+                onTap: null,
+              ),
+              ListTile(
+                title: Text('Sports News'),
+                onTap: null,
+              ),
+            ],
+          ),
+        ),
         //backgroundColor: Theme.of(context).primarySwatch,
         body: TabBarView(
           children: pages,
