@@ -30,7 +30,7 @@ class TileContents extends StatelessWidget {
     if (Settings.getValue('visual-layout', 1) == 2) {
       return ListTile(
         leading: CachedNetworkImage(
-          imageUrl: article.multimedia[4].url,
+          imageUrl: article.multimedia[2].url,
           progressIndicatorBuilder: (context, url, downloadProgress) =>
               CircularProgressIndicator(value: downloadProgress.progress),
           errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -75,6 +75,7 @@ class TileContents extends StatelessWidget {
               height: 8.0,
             ),
             Text(article.title, style: Theme.of(context).textTheme.subtitle1),
+            const Divider(),
           ],
         ),
       );
