@@ -1,4 +1,4 @@
-package com.example.flutter_app
+package com.example.github_flash_reads
 
 import io.flutter.embedding.android.FlutterActivity
 

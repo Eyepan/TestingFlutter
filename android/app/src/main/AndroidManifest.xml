@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flash_reads">
+    package="com.example.github_flash_reads">
    <application
-        android:label="flash_reads"
+        android:label="github_flash_reads"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

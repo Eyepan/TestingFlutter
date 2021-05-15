@@ -1,4 +1,4 @@
-# flash_reads
+# github_flash_reads
 
 A new Flutter project.
 
