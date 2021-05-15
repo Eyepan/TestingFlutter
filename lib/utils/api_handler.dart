@@ -9,7 +9,7 @@ class APIHandler {
   Future<List<Article>> getArticles() async {
     Response response = await get(Uri.parse(endPointUrl));
     if (response.statusCode == 200) {
-      Map<String, dynamic> json = jsonDecode(response.body);
+      Map<String, dynamic> json = jsonDecode(utf8.decode(response.bodyBytes));
       List<dynamic> body = json['results'];
       List<Article> articles =
           body.map((dynamic item) => Article.fromJson(item)).toList();

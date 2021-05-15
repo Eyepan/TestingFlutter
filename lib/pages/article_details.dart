@@ -72,7 +72,6 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
         ),
       ));
     }
-
     return Scaffold(
       appBar: AppBar(title: Text(widget.article.title)),
       backgroundColor: Colors.grey[900],

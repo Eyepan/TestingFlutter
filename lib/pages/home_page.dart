@@ -11,6 +11,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   APIHandler client = APIHandler();
+  //Future<List<Article>> articles;
+  @override
+  void initState() {
+    //articles = client.getArticles();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

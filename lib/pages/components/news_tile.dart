@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flash_reads/pages/article_details.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +47,7 @@ class TileContents extends StatelessWidget {
         ),
         isThreeLine: true,
       );
-    } else if (Settings.getValue('visual-layout', 1) == 1) {
+    } else {
       return Container(
         padding: const EdgeInsets.all(12.0),
         margin: const EdgeInsets.all(12.0),
@@ -60,13 +62,11 @@ class TileContents extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Flexible(
-              child: Center(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
-                  child: Image.network(
-                    article.multimedia[0].url,
-                  ),
+            Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Image.network(
+                  article.multimedia[0].url,
                 ),
               ),
             ),
