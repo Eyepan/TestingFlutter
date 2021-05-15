@@ -1,10 +1,11 @@
 import 'package:http/http.dart';
 import 'dart:convert';
 import 'article_class.dart';
+import 'package:flash_reads/secrets.dart';
 
 class APIHandler {
   final endPointUrl =
-      'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=gfq66JGbFDW5LeXVbUVlVKGRABFU7MNj';
+      'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=$apiKey';
 
   Future<List<Article>> getArticles() async {
     Response response = await get(Uri.parse(endPointUrl));
