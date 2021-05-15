@@ -1,7 +1,6 @@
 import 'multimedia_class.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart';
-import 'dart:convert' show utf8;
 
 class Article {
   String section;

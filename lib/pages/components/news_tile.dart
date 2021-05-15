@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flash_reads/pages/article_details.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +49,6 @@ class TileContents extends StatelessWidget {
       return Container(
         padding: const EdgeInsets.all(12.0),
         margin: const EdgeInsets.all(12.0),
-        height: 300,
         width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.grey[800],
@@ -65,8 +62,12 @@ class TileContents extends StatelessWidget {
             Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15.0),
-                child: Image.network(
-                  article.multimedia[0].url,
+                child: CachedNetworkImage(
+                  imageUrl: article.multimedia[0].url,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      CircularProgressIndicator(
+                          value: downloadProgress.progress),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
             ),

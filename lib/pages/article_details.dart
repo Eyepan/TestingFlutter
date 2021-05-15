@@ -1,11 +1,11 @@
 import 'package:flash_reads/utils/article_class.dart';
-import 'package:url_launcher/url_launcher.dart';
+//import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:share/share.dart';
 
 class ArticleDetailsPage extends StatefulWidget {
   final Article article;
-
   // ignore: use_key_in_widget_constructors
   const ArticleDetailsPage({this.article});
 
@@ -16,12 +16,12 @@ class ArticleDetailsPage extends StatefulWidget {
 class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
   final ScrollController _scrollController = ScrollController();
 
-  bool _showFloatingButton = true;
+  //bool _showFloatingButton = true;
 
   @override
   void initState() {
     super.initState();
-    handleScroll();
+    //handleScroll();
   }
 
   @override
@@ -30,30 +30,30 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
     super.dispose();
   }
 
-  void showFloatingActionButton() {
-    setState(() {
-      _showFloatingButton = true;
-    });
-  }
+  //void showFloatingActionButton() {
+  //  setState(() {
+  //    _showFloatingButton = true;
+  //  });
+  //}
+//
+  //void hideFloatingActionButton() {
+  //  setState(() {
+  //    _showFloatingButton = false;
+  //  });
+  //}
 
-  void hideFloatingActionButton() {
-    setState(() {
-      _showFloatingButton = false;
-    });
-  }
-
-  void handleScroll() async {
-    _scrollController.addListener(() {
-      if (_scrollController.position.userScrollDirection ==
-          ScrollDirection.reverse) {
-        hideFloatingActionButton();
-      }
-      if (_scrollController.position.userScrollDirection ==
-          ScrollDirection.forward) {
-        showFloatingActionButton();
-      }
-    });
-  }
+  //void handleScroll() async {
+  //  _scrollController.addListener(() {
+  //    if (_scrollController.position.userScrollDirection ==
+  //        ScrollDirection.reverse) {
+  //      hideFloatingActionButton();
+  //    }
+  //    if (_scrollController.position.userScrollDirection ==
+  //        ScrollDirection.forward) {
+  //      showFloatingActionButton();
+  //    }
+  //  });
+  //}
 
   List<Widget> listofParagraphs = [];
 
@@ -78,6 +78,7 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: SingleChildScrollView(
+          //,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,14 +108,15 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
           ),
         ),
       ),
-      floatingActionButton: Visibility(
-        visible: _showFloatingButton,
-        child: FloatingActionButton(
-          onPressed: () {
-            launch(widget.article.url);
-          },
-          child: const Icon(Icons.open_in_browser),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Share.share(
+            """${widget.article.title}
+${widget.article.shortUrl}
+Created from FlashReads""",
+          );
+        },
+        child: const Icon(Icons.share),
       ),
     );
   }
