@@ -107,8 +107,8 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
         onPressed: () {
           Share.share(
             """${widget.article.title}
-        ${widget.article.shortUrl}
-        Created from FlashReads""",
+${widget.article.shortUrl}
+Created from FlashReads""",
           );
         },
         child: const Icon(Icons.share),
@@ -116,3 +116,4 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
     );
   }
 }
+
