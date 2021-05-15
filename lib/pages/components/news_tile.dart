@@ -24,7 +24,7 @@ Widget newsTile(Article article, BuildContext context) {
 class TileContents extends StatelessWidget {
   final Article article;
   const TileContents({Key key, this.article}) : super(key: key);
-
+  // this should be in testing
   @override
   Widget build(BuildContext context) {
     if (Settings.getValue('visual-layout', 1) == 2) {
