@@ -71,11 +71,8 @@ class TileContents extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 8.0,
-            ),
-            Text(article.title, style: Theme.of(context).textTheme.subtitle1),
             const Divider(),
+            Text(article.title, style: Theme.of(context).textTheme.subtitle1),
           ],
         ),
       );

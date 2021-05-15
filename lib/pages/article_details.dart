@@ -87,13 +87,19 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
                         const Icon(Icons.error),
                   ),
                 ),
-                const SizedBox(height: 8.0),
+                const Divider(
+                  thickness: 3.0,
+                  color: Colors.white,
+                ),
                 Text(widget.article.title,
                     style: Theme.of(context)
                         .textTheme
                         .headline4
                         .copyWith(color: Colors.white)),
-                const SizedBox(height: 8.0),
+                const Divider(
+                  thickness: 3.0,
+                  color: Colors.grey,
+                ),
                 Text(widget.article.abstract,
                     style: Theme.of(context)
                         .textTheme
@@ -116,4 +122,3 @@ Created from FlashReads""",
     );
   }
 }
-
