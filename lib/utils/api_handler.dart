@@ -1,6 +1,6 @@
+import 'package:flash_reads/models/article_class.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
-import 'article_class.dart';
 import 'package:flash_reads/secrets.dart';
 
 class APIHandler {

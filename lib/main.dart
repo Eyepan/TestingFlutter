@@ -1,63 +1,76 @@
-import 'package:flash_reads/pages/favourites_page.dart';
+import 'package:flash_reads/pages/bookmarked_page.dart';
 import 'package:flash_reads/pages/home_page.dart';
-import 'package:flash_reads/pages/live_video.dart';
+import 'package:flash_reads/pages/live_news_page.dart';
 import 'package:flash_reads/pages/settings_page.dart';
+import 'package:flash_reads/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_settings_screens/flutter_settings_screens.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
-void main() => runApp(
-      MaterialApp(
-        title: 'FlashReads',
-        debugShowCheckedModeBanner: false,
-        home: MyHomePage(),
-        theme: ThemeData(
-          primarySwatch: Colors.purple,
-          primaryColor: Colors.grey[1000],
-          backgroundColor: Colors.black,
-          brightness: Brightness.dark,
-          textTheme: const TextTheme(
-            headline3: TextStyle(
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ),
+late SharedPreferences prefs;
+
+void main() => runApp(Phoenix(child: const FlashReads()));
+
+class FlashReads extends StatefulWidget {
+  const FlashReads({Key? key}) : super(key: key);
+  @override
+  _FlashReadsState createState() => _FlashReadsState();
+}
+
+class _FlashReadsState extends State<FlashReads> {
+  void asyncInits() async {
+    prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      debugPrint("Preferences Loadeed");
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    asyncInits();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Flash Reads",
+      debugShowCheckedModeBanner: false,
+      home: MyHomePage(),
+      theme: (prefs.getString('theme') == 'light')
+          ? lightThemeData(context)
+          : darkThemeData(context),
+      darkTheme: (prefs.getString('theme') == 'light')
+          ? lightThemeData(context)
+          : darkThemeData(context),
     );
+  }
+}
 
 // ignore: must_be_immutable, use_key_in_widget_constructors
 class MyHomePage extends StatefulWidget {
-  CacheProvider _customCacheProvider;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Widget> pages = [
-    HomePage(),
-    FavouritesPage(),
-    LiveVideoPage(),
-    SettingsPage(),
+    const HomePage(),
+    const BookmarkedPage(),
+    const LiveNewsPage(),
+    const SettingsPage(),
   ];
-
-  Future<void> asyncInits() async {
-    await Settings.init(cacheProvider: widget._customCacheProvider);
-  }
-
-  @override
-  void initState() {
-    asyncInits();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
+    var brightness = MediaQuery.of(context).platformBrightness;
+    bool darkModeOn = brightness == Brightness.dark;
     return DefaultTabController(
-      length: 4,
+      length: pages.length,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("FlashReads"),
-          //backgroundColor: Colors.blueGrey,
+          title: const Text("Flash Reads"),
           elevation: 0.0,
         ),
         drawer: Drawer(
@@ -93,12 +106,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-        //backgroundColor: Theme.of(context).primarySwatch,
         body: TabBarView(
           children: pages,
         ),
-        bottomNavigationBar: const TabBar(
-          tabs: [
+        bottomNavigationBar: TabBar(
+          tabs: const [
             Tab(
               icon: Icon(Icons.home),
             ),
@@ -113,9 +125,13 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: Icon(Icons.settings),
             ),
           ],
-          unselectedLabelColor: Colors.blueGrey,
-          labelColor: Colors.white,
-          indicatorColor: Colors.white,
+          unselectedLabelColor: Colors.grey,
+          labelColor: (prefs.getString('theme') == 'dark')
+              ? Colors.white
+              : Colors.black,
+          indicatorColor: (prefs.getString('theme') == 'dark')
+              ? Colors.white
+              : Colors.black,
         ),
       ),
     );

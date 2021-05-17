@@ -125,20 +125,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
-  flutter_material_color_picker:
-    dependency: transitive
-    description:
-      name: flutter_material_color_picker
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.5"
-  flutter_settings_screens:
+  flutter_phoenix:
     dependency: "direct main"
     description:
-      name: flutter_settings_screens
+      name: flutter_phoenix
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.2+1"
+    version: "1.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -150,7 +143,7 @@ packages:
     source: sdk
     version: "0.0.0"
   html:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: html
       url: "https://pub.dartlang.org"
@@ -209,13 +202,6 @@ packages:
     dependency: transitive
     description:
       name: mime
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
-  nested:
-    dependency: transitive
-    description:
-      name: nested
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
@@ -303,13 +289,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.1"
-  provider:
-    dependency: transitive
-    description:
-      name: provider
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.0"
   rxdart:
     dependency: transitive
     description:
@@ -332,7 +311,7 @@ packages:
     source: hosted
     version: "2.0.1"
   shared_preferences:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: shared_preferences
       url: "https://pub.dartlang.org"
@@ -441,13 +420,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
-  transparent_image:
-    dependency: "direct main"
-    description:
-      name: transparent_image
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   typed_data:
     dependency: transitive
     description:
@@ -511,13 +483,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  web_scraper:
-    dependency: "direct main"
-    description:
-      name: web_scraper
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.4"
   win32:
     dependency: transitive
     description:
