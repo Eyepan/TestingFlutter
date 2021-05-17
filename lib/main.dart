@@ -41,9 +41,6 @@ class _FlashReadsState extends State<FlashReads> {
       theme: (prefs.getString('theme') == 'light')
           ? lightThemeData(context)
           : darkThemeData(context),
-      darkTheme: (prefs.getString('theme') == 'light')
-          ? lightThemeData(context)
-          : darkThemeData(context),
     );
   }
 }
